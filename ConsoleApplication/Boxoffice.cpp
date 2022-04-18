@@ -31,13 +31,26 @@ Boxoffice::Boxoffice(const Boxoffice& obj)
 }
 
 void Boxoffice::enter() {
-	std::cout << "\n¬ведите ‘»ќ старшего кассира : ";
-	fio.enter();
-	std::cout << "¬ведите кол-во касс рабочих: ";
-	std::cin >> workers;
-	std::cout << "\n¬ведите кол-во касс: ";
-	std::cin >> count;
-	while (getchar() != '\n');
+	bool a = true;
+	while (a)
+	{
+		try
+		{
+			std::cout << "\n¬ведите ‘»ќ старшего кассира : ";
+			fio.enter();
+			std::cout << "¬ведите кол-во касс рабочих: ";
+			std::cin >> workers;
+			std::cout << "\n¬ведите кол-во касс: ";
+			std::cin >> count;
+			while (getchar() != '\n');
+			a = false;
+		}
+		catch (const std::exception& ex)
+		{
+			std::cout << ex.what() << "\nƒл€ продолжени€ нажмите любую кнопку.\n";
+			_getch();
+		}
+	}
 }
 
 void Boxoffice::print() {
