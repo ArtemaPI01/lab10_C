@@ -30,13 +30,28 @@ Owner::Owner(const Owner& obj)
 }
 
 void Owner::enter() {
-	std::cout << "Введите ФИО владельца: ";
-	fio.enter();
-	std::cout << "\nВведите доходы: ";
-	std::cin >> income;
-	std::cout << "\nВведите расходы: ";
-	std::cin >> expenses;
-	while (getchar() != '\n');
+	bool a = true;
+	while (a)
+	{
+		try
+		{
+			std::cout << "Введите ФИО владельца: ";
+			fio.enter();
+			std::cout << "\nВведите доходы: ";
+			std::cin >> income;
+			if (income < 0) throw std::exception("Ошибка! Отрицательное число.");
+			std::cout << "\nВведите расходы: ";
+			std::cin >> expenses;
+			if (expenses < 0) throw std::exception("Ошибка! Отрицательное число.");
+			while (getchar() != '\n');
+			a = false;
+		}
+		catch (const std::exception& ex)
+		{
+			std::cout << ex.what() << "\nДля продолжения нажмите любую кнопку.\n";
+			_getch();
+		}
+	}
 }
 
 void Owner::print() {
