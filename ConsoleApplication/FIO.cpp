@@ -30,12 +30,28 @@ FIO::FIO(const FIO& obj)
 
 
 void FIO::enter() {
-	std::cout << "\nВведите имя: ";
-	getline(std::cin, name);
-	std::cout << "\nВведите фамилию: ";
-	getline(std::cin, surname);
-	std::cout << "\nВведите отчество: ";
-	getline(std::cin, patronymic);
+	bool a = true;
+	while (a)
+	{
+		try
+		{
+			std::cout << "\nВведите имя: ";
+			getline(std::cin, name);
+			if (name == "") throw std::exception("Ошибка! Пустая строка.");
+			std::cout << "\nВведите фамилию: ";
+			getline(std::cin, surname);
+			if (surname == "") throw std::exception("Ошибка! Пустая строка.");
+			std::cout << "\nВведите отчество: ";
+			getline(std::cin, patronymic);
+			if (patronymic == "") throw std::exception("Ошибка! Пустая строка.");
+			a = false;
+		}
+		catch (const std::exception& ex)
+		{
+			std::cout << ex.what() << "\nДля продолжения нажмите любую кнопку.\n";
+			_getch();
+		}
+	}
 }
 void FIO::print() {
 	if (surname != "")
