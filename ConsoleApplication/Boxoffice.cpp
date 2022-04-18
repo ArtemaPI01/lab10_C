@@ -40,8 +40,10 @@ void Boxoffice::enter() {
 			fio.enter();
 			std::cout << "¬ведите кол-во касс рабочих: ";
 			std::cin >> workers;
+			if (workers < 0) throw std::exception("ќшибка! ќтрицательное число.");
 			std::cout << "\n¬ведите кол-во касс: ";
 			std::cin >> count;
+			if (count < 0) throw std::exception("ќшибка! ќтрицательное число.");
 			while (getchar() != '\n');
 			a = false;
 		}

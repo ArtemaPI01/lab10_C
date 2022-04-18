@@ -29,23 +29,37 @@ Warehouse::Warehouse(const Warehouse& obj)
 
 
 void Warehouse::enter() {
-	std::cout << "\nТовар: ";
-	std::string a;
-	getline(std::cin, a);
-	std::string buffer = "";
-	for (int i = 0; i < a.size(); i++) {
-		if (a[i] != ' ') {
-			buffer += a[i];
-		}
-		else {
+	bool a = true;
+	while (a)
+	{
+		try
+		{
+			std::cout << "\nТовар: ";
+			std::string str;
+			getline(std::cin, str);
+			std::string buffer = "";
+			for (int i = 0; i < str.size(); i++) {
+				if (str[i] != ' ') {
+					buffer += str[i];
+				}
+				else {
+					products.push_back(buffer);
+					buffer = "";
+				}
+			}
 			products.push_back(buffer);
-			buffer = "";
+			std::cout << "Кол-во пунктов приема: ";
+			std::cin >> station;
+			if (station < 0) throw std::exception("Ошибка! Отрицательное число.");
+			while (getchar() != '\n');
+			a = false;
+		}
+		catch (const std::exception& ex)
+		{
+			std::cout << ex.what() << "\nДля продолжения нажмите любую кнопку.\n";
+			_getch();
 		}
 	}
-	products.push_back(buffer);
-	std::cout << "Кол-во пунктов приема: ";
-	std::cin >> station;
-	while (getchar() != '\n');
 }
 
 void Warehouse::print() {
