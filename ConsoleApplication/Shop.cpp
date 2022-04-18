@@ -52,14 +52,31 @@ int Shop::getSize() const
 }
 
 void Shop::enter() {
-	std::cout << "Введите название: ";
-	getline(std::cin, name);
-	std::cout << "\nВведите тип: ";
-	getline(std::cin, type);
-	std::cout << "\nВведите улицу: ";
-	getline(std::cin, street);
-	std::cout << "\nВведите часы работы: ";
-	getline(std::cin, cloak);
+	bool a = true;
+	while (a)
+	{
+		try
+		{
+			std::cout << "Введите название: ";
+			getline(std::cin, name);
+			if (name == "") throw std::exception("Ошибка! Пустая строка.");
+			std::cout << "\nВведите тип: ";
+			getline(std::cin, type);
+			if (type == "") throw std::exception("Ошибка! Пустая строка.");
+			std::cout << "\nВведите улицу: ";
+			getline(std::cin, street);
+			if (street == "") throw std::exception("Ошибка! Пустая строка.");
+			std::cout << "\nВведите часы работы: ";
+			getline(std::cin, cloak);
+			if (cloak == "") throw std::exception("Ошибка! Пустая строка.");
+			a = false;
+		}
+		catch (const std::exception& ex)
+		{
+			std::cout << ex.what() << "\nДля продолжения нажмите любую кнопку.\n";
+			_getch();
+		}
+	}
 }
 
 void Shop::print() {
