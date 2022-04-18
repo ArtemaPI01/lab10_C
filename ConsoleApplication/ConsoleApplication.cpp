@@ -16,6 +16,8 @@ using namespace std;
 
 int main()
 {
+	try
+	{
 	setlocale(LC_ALL, "Rus");
 	SetConsoleCP(1251);
 	int N = 1;
@@ -57,4 +59,10 @@ int main()
 	box4 = box1;
 	box4.print();
 	_getch;
+	}
+	catch (const std::exception& ex)
+	{
+		std::cout << ex.what() << "\nДля продолжения нажмите любую кнопку.\n";
+		_getch();
+	}
 }
